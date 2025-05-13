@@ -1,0 +1,16 @@
+fastapi>=0.100.0,<0.101.0
+uvicorn>=0.15.0,<0.16.0
+pydantic>=2.7.4,<3.0.0
+sqlalchemy>=2.0.0,<3.0.0
+python-dotenv>=1.0.0,<2.0.0
+pytest>=7.0.0,<8.0.0
+pytest-asyncio>=0.18.0,<0.19.0
+httpx>=0.25.2,<0.26.0
+google-generativeai>=0.8.0,<0.9.0
+alembic>=1.12.0,<2.0.0  # For database migrations
+langgraph>=0.0.15
+markdown>=3.5.1,<4.0.0  # For markdown processing
+beautifulsoup4>=4.12.0,<5.0.0  # For HTML processing
+jinja2>=3.1.0,<4.0.0  # For template processing
+python-magic>=0.4.27,<0.5.0  # For content type detection
+typing-extensions>=4.8.0,<5.0.0  # For enhanced type hints

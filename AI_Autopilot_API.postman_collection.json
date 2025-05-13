@@ -1,0 +1,97 @@
+{
+  "info": {
+    "name": "AI Autopilot API",
+    "description": "Collection for testing the main endpoints of the AI Autopilot app.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Execute Task (No Approval)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"request\": \"Diagnose why Windows Server 2019 VM cpu01 hits 95%+ CPU, generate a PowerShell script to collect perfmon logs, and draft an email to management summarising findings.\",\n  \"require_approval\": false\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/api/v1/execute",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["api", "v1", "execute"]
+        }
+      }
+    },
+    {
+      "name": "Execute Task (With Approval)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"request\": \"Create Azure CLI commands to lock RDP (3389) on my three production VMs to 10.0.0.0/24 and pause for approval before outputting the commands.\",\n  \"require_approval\": true\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/api/v1/execute",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["api", "v1", "execute"]
+        }
+      }
+    },
+    {
+      "name": "Get Task Status",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8000/api/v1/tasks/{{task_id}}",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["api", "v1", "tasks", "{{task_id}}"]
+        }
+      }
+    },
+    {
+      "name": "Approve Plan",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8000/api/v1/plans/{{task_id}}/approve",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["api", "v1", "plans", "{{task_id}}", "approve"]
+        }
+      }
+    },
+    {
+      "name": "Reject Plan",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8000/api/v1/plans/{{task_id}}/reject",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["api", "v1", "plans", "{{task_id}}", "reject"]
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "task_id",
+      "value": "REPLACE_WITH_TASK_ID"
+    }
+  ]
+} 
