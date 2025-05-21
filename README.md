@@ -17,6 +17,28 @@ The application is structured as follows:
 - **`app/db/models.py`**: Contains the SQLAlchemy models for the database.
 - **`tests/test_core.py`**: Contains the core tests for the application.
 
+## Key AI Integrations & Advanced Features
+
+This project incorporates several advanced techniques to enhance its AI capabilities:
+
+* **DSPy for Structured Content Generation**:
+    * The `WriterAgent` leverages the DSPy framework for robust and structured content generation (e.g., emails, summaries, SOPs).
+    * This involves custom-defined DSPy `Signatures` (in `app/agents/writer/dspy_signatures.py`) to specify input/output contracts for various writing tasks.
+    * DSPy `Modules` (in `app/agents/writer/dspy_modules.py`) use `dspy.Predict` with these signatures to interact with the LLM.
+    * A `ContentOptimizer` (in `app/agents/writer/dspy_optimizer.py`) is set up with `BootstrapFewShot` for potential few-shot optimization of these generation tasks based on example inputs and evaluation metrics.
+
+* **Rule-Based Context Management & Focusing (MCP-Inspired)**:
+    * To ensure specialist agents receive focused and relevant information for each step of a plan, the `CoordinatorGraph` (specifically in `app/workflows/coordinator_workflow.py`) implements a rule-based context management strategy.
+    * Before an agent is called, a `focused_input_for_agent` is constructed. This input string prioritizes the specific `step_description` from the execution plan and appends a truncated version of the original user request to serve as broader context if needed.
+    * The `WriterAgent` benefits from further nuanced context preparation, where its input can also include summaries or details from previous diagnostic or automation steps, especially when its task involves summarizing these prior results.
+    * This contextualization aims to improve agent performance and efficiency by providing more relevant prompts.
+
+* **Non-Linear Workflow Enhancements**:
+    * The `CoordinatorGraph` has been enhanced with conditional logic to allow for non-linear execution paths based on agent outputs:
+        * **Diagnostic Confidence Branching**: If the `DiagnosticAgent` returns a diagnosis with a confidence score below a predefined threshold, the workflow dynamically alters the execution plan. Subsequent "fix-it" or automation steps are bypassed, and the `WriterAgent` is tasked with communicating the low-confidence/inconclusive diagnosis.
+        * **"No Problem Identified" Branching**: If the `DiagnosticAgent` determines that no actionable problem exists (based on a `problem_identified` flag it sets), the workflow again modifies the plan to skip irrelevant automation steps. The `WriterAgent` is then directed to report this "no problem found" status.
+
+
 ## Installation
 To install the required packages, follow these steps:
 1. Ensure you have Python 3.9 or later installed.

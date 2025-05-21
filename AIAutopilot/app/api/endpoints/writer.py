@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, BackgroundTasks
 from sqlalchemy.orm import Session
 from typing import Optional, Dict, Any
-from app.api.models import ContentRequest, ContentResponse, ContentStatus
+from app.models import ContentRequest, ContentResponse, ContentStatus
 from app.workflows.writer_graph import WriterGraph
 from app.workflows.writer_states import WriterGraphState, ContentState
 from app.core.writer_config import WriterGraphConfig, ContentFormat

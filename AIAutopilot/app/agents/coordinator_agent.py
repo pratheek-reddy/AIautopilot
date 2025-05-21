@@ -1,6 +1,6 @@
 from typing import Dict, List, Optional
 from pydantic import BaseModel
-from app.api.models import Plan, PlanStep
+from app.models import Plan, PlanStep
 from openai import OpenAI
 import json
 import logging

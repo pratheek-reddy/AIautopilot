@@ -3,7 +3,7 @@ from typing import Optional, List
 
 class EmailSignature(Signature):
     """Signature for generating professional emails."""
-    meeting_notes: str = InputField(desc="Raw meeting notes to be summarized")
+    meeting_notes: str = InputField(desc="Structured input containing specific task and broader context, potentially including diagnostic findings or script details")
     audience: str = InputField(desc="Target audience for the email (e.g., 'management', 'team', 'stakeholders')")
     tone: str = InputField(desc="Desired tone of the email (e.g., 'formal', 'casual', 'urgent')")
     
@@ -15,7 +15,7 @@ class EmailSignature(Signature):
 
 class SOPSignature(Signature):
     """Signature for generating Standard Operating Procedures."""
-    process_description: str = InputField(desc="Description of the process to document")
+    process_description: str = InputField(desc="Structured input containing specific task and broader context, with emphasis on process details and requirements")
     target_audience: str = InputField(desc="Intended users of the SOP")
     complexity_level: str = InputField(desc="Technical complexity level (basic, intermediate, advanced)")
     
@@ -28,7 +28,7 @@ class SOPSignature(Signature):
 
 class SummarySignature(Signature):
     """Signature for generating executive summaries."""
-    content: str = InputField(desc="Content to be summarized")
+    content: str = InputField(desc="Structured input containing specific task and broader context, potentially including diagnostic results, scripts, or other technical details to be summarized")
     target_length: str = InputField(desc="Desired length (e.g., 'brief', 'detailed')")
     key_points: List[str] = InputField(desc="Specific points that must be included")
     

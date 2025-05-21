@@ -4,7 +4,7 @@ import json
 import logging
 from unittest.mock import patch, MagicMock
 from app.agents.automation_agent import AutomationAgent
-from app.api.models import Script
+from app.models import Script
 from fastapi.testclient import TestClient
 from app.main import app
 from app.models import Diagnosis, DiagnosisSolution
